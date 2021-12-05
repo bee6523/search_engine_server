@@ -13,10 +13,6 @@ void eval(int clientfd, rio_t *rio, char *buf){
 
     argc = parseline(buf, argv);
     if(_strcmp(argv[0],"exit",5)==0){
-        if(argc>1){
-            printf("exit command do not need arguments\n");
-            return;
-        }
         exit(0);
     }else if(_strcmp(argv[0], "search", 7)==0){
         if(argc>2){
