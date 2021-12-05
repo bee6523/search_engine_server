@@ -214,7 +214,6 @@ void bootstrap(char *dirpath){
                         }
                     } while((cp = _strtok(NULL)) != NULL);
 
-                    // TODO: if one line exceeds MAXLINE, do not increment line var
                     if(_strlen(buf) == MAXLINE-1 && *(buf+MAXLINE-2) != '\n') 
                         continue;
                     line++;

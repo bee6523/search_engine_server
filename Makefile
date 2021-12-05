@@ -5,7 +5,6 @@ SERVER_SRC = src/server.c src/csapp.c src/utils.c src/linkedlist.c src/invidx.c 
 SERVER_HDR = src/include/csapp.h src/include/utils.h src/include/linkedlist.h src/include/invidx.h src/include/tc_malloc.h
 
 CLIENT_SUB = src/csapp.c src/utils.c src/tc_malloc.c
-CLIENT2_SRC = src/client.c src/csapp.c src/utils.c
 CLIENT_HDR = src/include/csapp.h src/include/utils.h src/include/tc_malloc.h
 
 all : server client1 client2
