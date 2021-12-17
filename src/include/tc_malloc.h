@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // if set to 1, use tcmalloc. else use ordinary malloc.
-#define TC_MALLOC_ENABLED 0
+#define TC_MALLOC_ENABLED 1
 
 //2^20 pages should be managed
 #define PAGE_DOMAIN 1<<20
