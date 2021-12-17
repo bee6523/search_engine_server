@@ -48,6 +48,13 @@ void *worker(void *arg){
             usleep(1);//spinlock
         }
         query = th->job;
+        if(dict == NULL){
+            sprintf(buf, "file does not exists");
+            send_error(th->fd, buf);
+            Free(th->job);
+            th->job = NULL;
+            continue;
+        }
         term_t *term = dict_search(dict->head, query, 0);
         if(term==NULL){  //term not found
             sprintf(buf, ". -1");//term code
@@ -219,6 +226,12 @@ void bootstrap(char *dirpath){
             }
         }
         closedir(dir);
+    }
+    if(num_docs == 0){
+        dict=NULL;
+        list_free(list);
+        printf("*** Bootstrapping Failed: %d file(s) loaded ***\n", num_docs);
+        return;
     }
     list_sort(list);
     dict = dict_create(list);
