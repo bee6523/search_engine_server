@@ -16,7 +16,8 @@ int main(int argc, char **argv)
     req_per_th = atoi(argv[4]);
     query = argv[5];
     printf("creating threads\n"); fflush(stdout);
-    tc_central_init();
+    if(TC_MALLOC_ENABLED)
+        tc_central_init();
     pthread_t pids[num_threads];
     for(i=0; i<num_threads; i++){
         Pthread_create(&pids[i], NULL, worker, NULL);
@@ -39,7 +40,8 @@ void* worker(void *argp){
 
     int argc;
     char *tok[2];
-    tc_thread_init();
+    if(TC_MALLOC_ENABLED)
+        tc_thread_init();
     clientfd = Open_clientfd(host, port);
     rio_readinitb(&rio, clientfd);
     for(int i=0; i<req_per_th; i++){

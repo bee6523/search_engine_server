@@ -42,7 +42,8 @@ void *worker(void *arg){
     int argc, i;
     node_t *docnode;
     printf("worker online\n");
-    tc_thread_init();
+    if(TC_MALLOC_ENABLED)
+        tc_thread_init();
     while(1){
         while(th->job == NULL){
             usleep(1);//spinlock
@@ -89,8 +90,10 @@ int main(int argc, char **argv)
     unsigned short client_port;
     unsigned int ip;
 
-    tc_central_init();
-    tc_thread_init();
+    if(TC_MALLOC_ENABLED){
+        tc_central_init();
+        tc_thread_init();
+    }
     pool_t *pool = Malloc(sizeof(pool_t));
     pthread_t pids[NUM_THREADS];
     thread_t threads[NUM_THREADS];

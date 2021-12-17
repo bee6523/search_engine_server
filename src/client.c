@@ -60,8 +60,11 @@ int main(int argc, char **argv)
     rio_t rio;
     clientfd = Open_clientfd(host, port);
     rio_readinitb(&rio, clientfd);
-    tc_central_init();
-    tc_thread_init();
+
+    if(TC_MALLOC_ENABLED){
+        tc_central_init();
+        tc_thread_init();
+    }
 
     while(1){
         printf("%s> ", pgm_name);

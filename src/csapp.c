@@ -451,10 +451,15 @@ void Munmap(void *start, size_t length)
 void *Malloc(size_t size) 
 {
     void *p;
-
-    if ((p  = tc_malloc(size)) == NULL)
-	unix_error("Malloc error");
-    return p;
+    if(TC_MALLOC_ENABLED){
+        if ((p  = tc_malloc(size)) == NULL)
+	        unix_error("Malloc error");
+        return p;
+    }else{
+        if ((p  = malloc(size)) == NULL)
+	        unix_error("Malloc error");
+        return p;
+    }
 }
 
 void *Realloc(void *ptr, size_t size) 
@@ -470,15 +475,24 @@ void *Calloc(size_t nmemb, size_t size)
 {
     void *p;
 
-    if ((p = tc_malloc(nmemb*size)) == NULL)
+    if(TC_MALLOC_ENABLED){
+        if ((p = tc_malloc(nmemb*size)) == NULL)
+	        unix_error("Calloc error");
+        memset(p, 0, nmemb*size);
+        return p;
+    }else{
+        if ((p = calloc(nmemb, size)) == NULL)
 	    unix_error("Calloc error");
-    memset(p, 0, nmemb*size);
-    return p;
+        return p;
+    }
 }
 
 void Free(void *ptr) 
 {
-    tc_free(ptr);
+    if(TC_MALLOC_ENABLED)
+        tc_free(ptr);
+    else
+        free(ptr);
 }
 
 /******************************************
