@@ -49,7 +49,7 @@ void *worker(void *arg){
         }
         query = th->job;
         if(dict == NULL){
-            sprintf(buf, "file does not exists");
+            sprintf(buf, "server doesn't have any files");
             send_error(th->fd, buf);
             Free(th->job);
             th->job = NULL;

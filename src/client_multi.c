@@ -53,7 +53,7 @@ void* worker(void *argp){
                     if(packet.len != PACKET_SIZE){ //if there is error message, print it
                         ret = Calloc(packet.len-7, 1);
                         Rio_readnb(&rio, ret, packet.len - PACKET_SIZE);
-                        fprintf(stderr, "ERROR: recieved error packet\nMSG from server: %s\n", ret);
+                        fprintf(stderr, "ERROR: %s\n", ret);
                         Free(ret);
                         break;
                     }else{

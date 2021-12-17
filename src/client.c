@@ -25,7 +25,7 @@ void eval(int clientfd, rio_t *rio, char *buf){
                     if(packet.len != PACKET_SIZE){ //if there is error message, print it
                         ret = Calloc(packet.len-7, 1);
                         Rio_readnb(rio, ret, packet.len - PACKET_SIZE);
-                        fprintf(stderr, "ERROR: recieved error packet\nERROR CODE:%s\n", ret);
+                        fprintf(stderr, "ERROR: %s\n", ret);
                         Free(ret);
                     }else{
                         fprintf(stderr,"ERROR: recieved error packet\n");
