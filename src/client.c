@@ -3,8 +3,6 @@
 
 int req_per_th;
 
-void* worker(void *argp);
-
 void eval(int clientfd, rio_t *rio, char *buf){
     int argc, i;
     char *argv[MAXARGS], *ret;

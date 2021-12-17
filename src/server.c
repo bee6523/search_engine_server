@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <dirent.h>
-#include <string.h>
 #include <semaphore.h>
 #include "utils.h"
 #include "invidx.h"
@@ -8,8 +7,6 @@
 #include "csapp.h"
 
 #define NUM_THREADS 10
-
-enum state {IDLE, ALLOC};
 
 typedef struct {
     int maxfd;
@@ -21,7 +18,6 @@ typedef struct {
 } pool_t;
 
 typedef struct {
-    enum state status;
     char *job;
     int fd;
 } thread_t;
@@ -35,7 +31,7 @@ void bootstrap(char *dirpath);
 
 void thread_init(thread_t *t){
     t->job = NULL;
-    t->status=IDLE;
+    t->fd = 0;
 }
 
 void *worker(void *arg){
